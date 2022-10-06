@@ -6,6 +6,7 @@ export default function Todo({
   deleteTodo,
   input,
   handleChange,
+  editTodo,
 }) {
   return (
     <div>
@@ -14,6 +15,7 @@ export default function Todo({
           <div key={idx}>
             <span>{todo.input}</span>
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            <button onClick={() => editTodo(todo.id)}>Edit</button>
           </div>
         );
       })}

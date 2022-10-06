@@ -26,6 +26,9 @@ function App() {
 
   function addTodo(e, id) {
     e.preventDefault();
+    if (input.length === 0) {
+      return;
+    }
     setTodoList((prev) => [
       ...prev,
       {
@@ -47,23 +50,28 @@ function App() {
     setInput(e.target.value);
   }
 
+  function editTodo(todo) {
+    console.log({ todo });
+  }
+
   return (
     <div className='App'>
       <LeftPaneStyled>
-        <p> hello world</p>
+        <h1>Tasks</h1>
         <Todo
           todoList={todoList}
           addTodo={addTodo}
           deleteTodo={deleteTodo}
           input={input}
           handleChange={handleChange}
+          editTodo={editTodo}
         />
       </LeftPaneStyled>
       <CenterPaneStyled>
-        <p>center</p>
+        <h1>Workflow</h1>
       </CenterPaneStyled>
       <RightPaneStyled>
-        <p>right</p>
+        <h1>Completed</h1>
       </RightPaneStyled>
     </div>
   );
