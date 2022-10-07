@@ -6,16 +6,43 @@ export default function Todo({
   deleteTodo,
   input,
   handleChange,
-  editTodo,
+  toggleEdit,
+  handleEditChange,
+  temp,
+  handleEditSubmit,
+  revertChanges,
 }) {
   return (
     <div>
       {todoList.map((todo, idx) => {
         return (
           <div key={idx}>
-            <span>{todo.input}</span>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-            <button onClick={() => editTodo(todo.id)}>Edit</button>
+            {todo.canEdit ? (
+              <div>
+                <form onSubmit={(e) => handleEditSubmit(e, todo.id)}>
+                  <input
+                    type='text'
+                    value={temp.input || ""}
+                    onChange={handleEditChange}></input>
+                  <button type='submit' disabled={temp.input === ""}>
+                    Update
+                  </button>
+                  <button
+                    type='button'
+                    onClick={() => {
+                      revertChanges(todo.id);
+                    }}>
+                    Revert
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <div>
+                <span>{todo.input}</span>
+                <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+                <button onClick={() => toggleEdit(todo.id)}>Edit</button>
+              </div>
+            )}
           </div>
         );
       })}

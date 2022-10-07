@@ -23,7 +23,9 @@ const RightPaneStyled = styled.div`
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [input, setInput] = useState("");
+  const [temp, setTemp] = useState("");
 
+  //Adding Todos
   function addTodo(e, id) {
     e.preventDefault();
     if (input.length === 0) {
@@ -34,15 +36,16 @@ function App() {
       {
         input: input,
         id: id,
+        canEdit: false,
       },
     ]);
+    //Reset addTodo field
     setInput("");
   }
 
+  //Deleting Todos
   function deleteTodo(todo) {
-    console.log(todo);
     const newList = todoList.filter((item) => item.id !== todo);
-
     setTodoList(newList);
   }
 
@@ -50,8 +53,46 @@ function App() {
     setInput(e.target.value);
   }
 
-  function editTodo(todo) {
-    console.log({ todo });
+  //Editing Todos
+  function toggleEdit(id) {
+    const taskToUpdate = todoList.find((item) => item.id === id);
+    setTemp(taskToUpdate);
+
+    const newList = todoList.map((item) => {
+      if (item.id === id) {
+        item.canEdit = item.canEdit ? false : true;
+      }
+      return item;
+    });
+    setTodoList(newList);
+  }
+
+  function handleEditChange(e) {
+    setTemp({ input: e.target.value });
+    console.log(e.target.value);
+  }
+
+  function handleEditSubmit(e, id) {
+    e.preventDefault();
+    const newList = todoList.map((item) => {
+      if (item.id === id) {
+        item.input = temp.input;
+      }
+      return item;
+    });
+
+    setTodoList(newList);
+    toggleEdit(id);
+  }
+
+  function revertChanges(id) {
+    const newList = todoList.map((item) => {
+      if (item.id === id) {
+        temp.input = item.input;
+      }
+      return item;
+    });
+    setTodoList(newList);
   }
 
   return (
@@ -64,7 +105,11 @@ function App() {
           deleteTodo={deleteTodo}
           input={input}
           handleChange={handleChange}
-          editTodo={editTodo}
+          toggleEdit={toggleEdit}
+          handleEditChange={handleEditChange}
+          temp={temp}
+          handleEditSubmit={handleEditSubmit}
+          revertChanges={revertChanges}
         />
       </LeftPaneStyled>
       <CenterPaneStyled>
