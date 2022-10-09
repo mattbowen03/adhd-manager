@@ -2,28 +2,28 @@ import "./App.css";
 import styled from "styled-components";
 import Todo from "./components/Todo";
 import { useState } from "react";
+import WorkflowTask from "./components/WorkflowTask";
 
+//Styles
 const LeftPaneStyled = styled.div`
-  width: 20%;
+  width: 50%;
   height: 100vh;
-  background-color: pink;
+  background-color: rgb(250, 250, 250);
+  padding: 8px;
 `;
 
 const CenterPaneStyled = styled.div`
-  width: 60%;
-  background-color: aliceblue;
+  width: 50%;
   height: 100vh;
-`;
-const RightPaneStyled = styled.div`
-  width: 20%;
-  background-color: gray;
-  height: 100vh;
+  padding: 8px;
 `;
 
 function App() {
+  //State
   const [todoList, setTodoList] = useState([]);
   const [input, setInput] = useState("");
   const [temp, setTemp] = useState("");
+  const [workflowList, setWorkflowList] = useState([]);
 
   //Adding Todos
   function addTodo(e, id) {
@@ -47,6 +47,11 @@ function App() {
   function deleteTodo(todo) {
     const newList = todoList.filter((item) => item.id !== todo);
     setTodoList(newList);
+  }
+
+  function deleteFromWorkflow(todo) {
+    const newList = workflowList.filter((item) => item.id !== todo);
+    setWorkflowList(newList);
   }
 
   function handleChange(e) {
@@ -93,6 +98,20 @@ function App() {
       return item;
     });
     setTodoList(newList);
+    toggleEdit(id);
+  }
+
+  //Move todo to workflow
+  function addToWorkflow(id) {
+    const taskToAdd = todoList.find((item) => item.id === id);
+    setWorkflowList((prev) => [...prev, taskToAdd]);
+    deleteTodo(id);
+  }
+
+  function removeFromWorkflow(id) {
+    const taskToRemove = workflowList.find((item) => item.id === id);
+    setTodoList((prev) => [...prev, taskToRemove]);
+    deleteFromWorkflow(id);
   }
 
   return (
@@ -110,14 +129,28 @@ function App() {
           temp={temp}
           handleEditSubmit={handleEditSubmit}
           revertChanges={revertChanges}
+          addToWorkflow={addToWorkflow}
         />
       </LeftPaneStyled>
       <CenterPaneStyled>
         <h1>Workflow</h1>
+        <WorkflowTask
+          workflowList={workflowList}
+          todoList={todoList}
+          addTodo={addTodo}
+          deleteTodo={deleteTodo}
+          input={input}
+          handleChange={handleChange}
+          toggleEdit={toggleEdit}
+          handleEditChange={handleEditChange}
+          temp={temp}
+          handleEditSubmit={handleEditSubmit}
+          revertChanges={revertChanges}
+          addToWorkflow={addToWorkflow}
+          removeFromWorkflow={removeFromWorkflow}
+          deleteFromWorkflow={deleteFromWorkflow}
+        />
       </CenterPaneStyled>
-      <RightPaneStyled>
-        <h1>Completed</h1>
-      </RightPaneStyled>
     </div>
   );
 }
