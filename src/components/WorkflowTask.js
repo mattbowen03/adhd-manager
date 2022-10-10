@@ -13,10 +13,10 @@ import {
 } from "../styles/todoStyle";
 
 function WorkflowTask({
-  toggleEdit,
+  toggleWorkflowEdit,
   handleEditChange,
   temp,
-  handleEditSubmit,
+  handleEditWorkflowSubmit,
   revertChanges,
   workflowList,
   removeFromWorkflow,
@@ -29,7 +29,7 @@ function WorkflowTask({
           <TodoContainer key={idx} draggable={todo.canEdit ? false : true}>
             {todo.canEdit ? (
               <div>
-                <form onSubmit={(e) => handleEditSubmit(e, todo.id)}>
+                <form onSubmit={(e) => handleEditWorkflowSubmit(e, todo.id)}>
                   <Input
                     type='text'
                     maxLength='40'
@@ -57,7 +57,7 @@ function WorkflowTask({
                 <Button onClick={() => deleteFromWorkflow(todo.id)}>
                   <img src={deleteIcon} alt='delete' />
                 </Button>
-                <Button onClick={() => toggleEdit(todo.id)}>
+                <Button onClick={() => toggleWorkflowEdit(todo.id)}>
                   <img src={editIcon} alt='edit' />
                 </Button>
                 <Button onClick={() => removeFromWorkflow(todo.id)}>

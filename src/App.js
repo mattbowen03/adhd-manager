@@ -64,6 +64,10 @@ function App() {
     setTemp(taskToUpdate);
 
     const newList = todoList.map((item) => {
+      if (item.id !== id && item.canEdit === true) {
+        item.input = temp.input;
+        item.canEdit = false;
+      }
       if (item.id === id) {
         item.canEdit = item.canEdit ? false : true;
       }
@@ -72,9 +76,21 @@ function App() {
     setTodoList(newList);
   }
 
+  function toggleWorkflowEdit(id) {
+    const taskToUpdate = workflowList.find((item) => item.id === id);
+    setTemp(taskToUpdate);
+
+    const newList = workflowList.map((item) => {
+      if (item.id === id) {
+        item.canEdit = item.canEdit ? false : true;
+      }
+      return item;
+    });
+    setWorkflowList(newList);
+  }
+
   function handleEditChange(e) {
     setTemp({ input: e.target.value });
-    console.log(e.target.value);
   }
 
   function handleEditSubmit(e, id) {
@@ -87,6 +103,19 @@ function App() {
     });
 
     setTodoList(newList);
+    toggleEdit(id);
+  }
+
+  function handleEditWorkflowSubmit(e, id) {
+    e.preventDefault();
+    const newList = workflowList.map((item) => {
+      if (item.id === id) {
+        item.input = temp.input;
+      }
+      return item;
+    });
+
+    setWorkflowList(newList);
     toggleEdit(id);
   }
 
@@ -141,10 +170,10 @@ function App() {
           deleteTodo={deleteTodo}
           input={input}
           handleChange={handleChange}
-          toggleEdit={toggleEdit}
+          toggleWorkflowEdit={toggleWorkflowEdit}
           handleEditChange={handleEditChange}
           temp={temp}
-          handleEditSubmit={handleEditSubmit}
+          handleEditWorkflowSubmit={handleEditWorkflowSubmit}
           revertChanges={revertChanges}
           addToWorkflow={addToWorkflow}
           removeFromWorkflow={removeFromWorkflow}
