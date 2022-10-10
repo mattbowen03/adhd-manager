@@ -28,7 +28,10 @@ function WorkflowTask({
     <TodoListContainer>
       {workflowList.map((todo, idx) => {
         return (
-          <TodoContainer key={idx} draggable={todo.canEdit ? false : true}>
+          <TodoContainer
+            openEdit={todo.id === temp.id && openEdit ? true : false}
+            key={idx}
+            draggable={todo.canEdit ? false : true}>
             {todo.canEdit ? (
               <div>
                 <form onSubmit={(e) => handleEditWorkflowSubmit(e, todo.id)}>

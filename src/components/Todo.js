@@ -32,7 +32,10 @@ export default function Todo({
       <TodoListContainer>
         {todoList.map((todo, idx) => {
           return (
-            <TodoContainer key={idx} draggable={todo.canEdit ? false : true}>
+            <TodoContainer
+              openEdit={todo.id === temp.id && openEdit ? true : false}
+              key={idx}
+              draggable={todo.canEdit ? false : true}>
               {todo.canEdit ? (
                 <div>
                   <form onSubmit={(e) => handleEditSubmit(e, todo.id)}>

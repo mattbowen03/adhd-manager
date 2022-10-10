@@ -6,7 +6,6 @@ export const Button = styled.button`
   display: inline-block;
   border: none;
   padding: 4px 6px;
-  margin: 2px;
   text-decoration: none;
   background: #0069ed;
   color: #ffffff;
@@ -40,6 +39,7 @@ export const Input = styled.input`
   font-size: 16px;
   border-radius: none;
   padding: 4px 8px;
+  margin-bottom: 8px;
 
   :focus {
     outline: none;
@@ -62,7 +62,7 @@ export const TodoText = styled.p`
 export const TodoContainer = styled.div`
   padding: 8px;
   border-bottom: 1px solid lightgray;
-  background-color: hsla(0, 0%, 100%, 0.96);
+  background-color: ${(props) => (props.openEdit ? "#EDCB0C" : "transparent")};
 `;
 
 export const TodoListContainer = styled.div`
