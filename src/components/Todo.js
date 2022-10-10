@@ -13,8 +13,10 @@ import {
   TodoText,
   AddTaskContainer,
   TimeInput,
+  TimeContainer,
 } from "../styles/todoStyle";
 import TaskTime from "./TaskTime";
+import displayTime from "../utils/displayTime";
 
 export default function Todo({
   todoList,
@@ -49,13 +51,24 @@ export default function Todo({
                       value={temp.input || ""}
                       onChange={handleEditChange}
                       name='input'></Input>
-                    <TimeInput
-                      maxLength={2}
-                      placeholder='00'
-                      name='hours'
-                      onChange={handleEditChange}
-                      value={temp.hours || ""}
-                      required></TimeInput>
+                    <TimeContainer>
+                      <TimeInput
+                        type='number'
+                        maxLength={2}
+                        placeholder='00'
+                        name='hours'
+                        onChange={handleEditChange}
+                        value={temp.hours || ""}></TimeInput>
+                      <p>hrs.</p>
+                      <TimeInput
+                        type='number'
+                        maxLength={2}
+                        placeholder='00'
+                        name='minutes'
+                        onChange={handleEditChange}
+                        value={temp.minutes || ""}></TimeInput>
+                      <p>mns.</p>
+                    </TimeContainer>
                     <UpdateOptions>
                       <Button
                         type='button'
@@ -74,6 +87,7 @@ export default function Todo({
                 <Container>
                   <Container>
                     <TodoText>{todo.input}</TodoText>
+                    <p>{displayTime(todo.hours, todo.minutes)}</p>
                   </Container>
                   <Button onClick={() => deleteTodo(todo.id)}>
                     <img src={deleteIcon} alt='delete' />
@@ -112,7 +126,18 @@ export default function Todo({
             required
             name='task'
           />
-          <TaskTime input={input} handleChange={handleChange} />
+          <TimeContainer>
+            <TaskTime input={input} handleChange={handleChange} />
+            <p>hrs.</p>
+            <TimeInput
+              type='number'
+              maxLength={2}
+              placeholder='00'
+              name='minutes'
+              onChange={handleChange}
+              value={input.minutes || ""}></TimeInput>
+            <p>mns.</p>
+          </TimeContainer>
           <Button type='submit' style={{ display: "block" }}>
             Add Task
           </Button>

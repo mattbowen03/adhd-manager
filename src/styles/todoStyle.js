@@ -48,18 +48,28 @@ export const Input = styled.input`
 `;
 
 export const TimeInput = styled.input`
-  width: 38px;
+  text-align: right;
+  width: 40px;
   height: 40px;
   border: none;
   font-size: 16px;
   border-radius: none;
   padding: 4px 8px;
-  margin-bottom: 8px;
 
   :focus {
     outline: none;
-    box-shadow: inset 0px 0px 2px rgba(0, 0, 0, 0.2);
+    /* box-shadow: inset 0px 0px 2px rgba(0, 0, 0, 0.2); */
+    border: none;
   }
+`;
+
+export const TimeContainer = styled.div`
+  width: 170px;
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  margin-bottom: 8px;
+  color: grey;
 `;
 
 export const Container = styled.div`
@@ -72,6 +82,7 @@ export const TodoText = styled.p`
   width: 80%;
   word-wrap: break-word;
   color: #474748;
+  font-weight: 500;
 `;
 
 export const TodoContainer = styled.div`
@@ -90,7 +101,7 @@ export const UpdateOptions = styled.div`
 `;
 
 export const AddTaskContainer = styled.div`
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   padding: 8px;
-  background: #edcb0c;
+  background: #8db95b;
 `;

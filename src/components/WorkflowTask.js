@@ -38,17 +38,18 @@ function WorkflowTask({
                 <form onSubmit={(e) => handleEditWorkflowSubmit(e, todo.id)}>
                   <Input
                     type='text'
+                    name='input'
                     autoFocus
                     maxLength='40'
                     value={temp.input || ""}
                     onChange={handleEditChange}></Input>
                   <TimeInput
+                    type='number'
                     maxLength={2}
                     placeholder='00'
                     name='hours'
                     onChange={handleEditChange}
-                    value={temp.hours || ""}
-                    required></TimeInput>
+                    value={temp.hours || ""}></TimeInput>
                   <UpdateOptions>
                     <Button
                       type='button'

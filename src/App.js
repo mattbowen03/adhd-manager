@@ -20,6 +20,7 @@ const CenterPaneStyled = styled.div`
 
 function App() {
   //State
+
   const [todoList, setTodoList] = useState([]);
   const [input, setInput] = useState("");
   const [temp, setTemp] = useState("");
@@ -39,7 +40,7 @@ function App() {
         id: id,
         canEdit: false,
         hours: input.hours,
-        minutes: 0,
+        minutes: input.minutes,
       },
     ]);
     //Reset addTodo field
@@ -117,6 +118,7 @@ function App() {
       if (item.id === id) {
         item.input = temp.input;
         item.hours = temp.hours;
+        item.minutes = temp.minutes;
       }
       return item;
     });
@@ -132,6 +134,8 @@ function App() {
     const newList = workflowList.map((item) => {
       if (item.id === id) {
         item.input = temp.input;
+        item.hours = temp.hours;
+        item.minutes = temp.minutes;
       }
       return item;
     });
