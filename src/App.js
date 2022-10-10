@@ -24,6 +24,7 @@ function App() {
   const [input, setInput] = useState("");
   const [temp, setTemp] = useState("");
   const [workflowList, setWorkflowList] = useState([]);
+  const [openEdit, setOpenEdit] = useState(false);
 
   //Adding Todos
   function addTodo(e, id) {
@@ -70,6 +71,7 @@ function App() {
       }
       if (item.id === id) {
         item.canEdit = item.canEdit ? false : true;
+        setOpenEdit(true);
       }
       return item;
     });
@@ -81,8 +83,14 @@ function App() {
     setTemp(taskToUpdate);
 
     const newList = workflowList.map((item) => {
+      if (item.id !== id && item.canEdit === true) {
+        item.input = temp.input;
+        item.canEdit = false;
+      }
+
       if (item.id === id) {
         item.canEdit = item.canEdit ? false : true;
+        setOpenEdit(true);
       }
       return item;
     });
@@ -104,6 +112,7 @@ function App() {
 
     setTodoList(newList);
     toggleEdit(id);
+    setOpenEdit(false);
   }
 
   function handleEditWorkflowSubmit(e, id) {
@@ -116,7 +125,8 @@ function App() {
     });
 
     setWorkflowList(newList);
-    toggleEdit(id);
+    toggleWorkflowEdit(id);
+    setOpenEdit(false);
   }
 
   function revertChanges(id) {
@@ -128,6 +138,19 @@ function App() {
     });
     setTodoList(newList);
     toggleEdit(id);
+    setOpenEdit(false);
+  }
+
+  function revertWorkflowChanges(id) {
+    const newList = workflowList.map((item) => {
+      if (item.id === id) {
+        temp.input = item.input;
+      }
+      return item;
+    });
+    setWorkflowList(newList);
+    toggleWorkflowEdit(id);
+    setOpenEdit(false);
   }
 
   //Move todo to workflow
@@ -146,7 +169,7 @@ function App() {
   return (
     <div className='App'>
       <LeftPaneStyled>
-        <h1>Tasks</h1>
+        <h1>Task List</h1>
         <Todo
           todoList={todoList}
           addTodo={addTodo}
@@ -159,6 +182,7 @@ function App() {
           handleEditSubmit={handleEditSubmit}
           revertChanges={revertChanges}
           addToWorkflow={addToWorkflow}
+          openEdit={openEdit}
         />
       </LeftPaneStyled>
       <CenterPaneStyled>
@@ -178,6 +202,8 @@ function App() {
           addToWorkflow={addToWorkflow}
           removeFromWorkflow={removeFromWorkflow}
           deleteFromWorkflow={deleteFromWorkflow}
+          openEdit={openEdit}
+          revertWorkflowChanges={revertWorkflowChanges}
         />
       </CenterPaneStyled>
     </div>

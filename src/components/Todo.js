@@ -25,6 +25,7 @@ export default function Todo({
   handleEditSubmit,
   revertChanges,
   addToWorkflow,
+  openEdit,
 }) {
   return (
     <div>
@@ -37,6 +38,7 @@ export default function Todo({
                   <form onSubmit={(e) => handleEditSubmit(e, todo.id)}>
                     <Input
                       type='text'
+                      autoFocus
                       maxLength='40'
                       value={temp.input || ""}
                       onChange={handleEditChange}></Input>
@@ -62,7 +64,12 @@ export default function Todo({
                   <Button onClick={() => deleteTodo(todo.id)}>
                     <img src={deleteIcon} alt='delete' />
                   </Button>
-                  <Button onClick={() => toggleEdit(todo.id)}>
+                  <Button
+                    onClick={() => {
+                      if (!openEdit) {
+                        toggleEdit(todo.id);
+                      }
+                    }}>
                     <img src={editIcon} alt='edit' />
                   </Button>
                   <Button onClick={() => addToWorkflow(todo.id)}>
@@ -85,9 +92,9 @@ export default function Todo({
           style={{ display: "block" }}
           value={input || ""}
           onChange={handleChange}
-          placeholder='Add todo...'
+          placeholder='Add Task...'
         />
-        <Button type='submit'>Add Todo</Button>
+        <Button type='submit'>Add Task</Button>
       </form>
     </div>
   );

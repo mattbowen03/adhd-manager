@@ -13,14 +13,16 @@ import {
 } from "../styles/todoStyle";
 
 function WorkflowTask({
+  todoList,
   toggleWorkflowEdit,
   handleEditChange,
   temp,
   handleEditWorkflowSubmit,
-  revertChanges,
   workflowList,
   removeFromWorkflow,
   deleteFromWorkflow,
+  openEdit,
+  revertWorkflowChanges,
 }) {
   return (
     <TodoListContainer>
@@ -32,6 +34,7 @@ function WorkflowTask({
                 <form onSubmit={(e) => handleEditWorkflowSubmit(e, todo.id)}>
                   <Input
                     type='text'
+                    autoFocus
                     maxLength='40'
                     value={temp.input || ""}
                     onChange={handleEditChange}></Input>
@@ -39,7 +42,7 @@ function WorkflowTask({
                     <Button
                       type='button'
                       onClick={() => {
-                        revertChanges(todo.id);
+                        revertWorkflowChanges(todo.id);
                       }}>
                       Revert
                     </Button>
@@ -57,7 +60,12 @@ function WorkflowTask({
                 <Button onClick={() => deleteFromWorkflow(todo.id)}>
                   <img src={deleteIcon} alt='delete' />
                 </Button>
-                <Button onClick={() => toggleWorkflowEdit(todo.id)}>
+                <Button
+                  onClick={() => {
+                    if (!openEdit) {
+                      toggleWorkflowEdit(todo.id);
+                    }
+                  }}>
                   <img src={editIcon} alt='edit' />
                 </Button>
                 <Button onClick={() => removeFromWorkflow(todo.id)}>
