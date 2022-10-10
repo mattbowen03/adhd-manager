@@ -48,7 +48,7 @@ export default function Todo({
                       maxLength='40'
                       value={temp.input || ""}
                       onChange={handleEditChange}
-                      name='taskName'></Input>
+                      name='input'></Input>
                     <TimeInput
                       maxLength={2}
                       placeholder='00'

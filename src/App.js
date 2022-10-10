@@ -104,7 +104,11 @@ function App() {
   }
 
   function handleEditChange(e) {
-    setTemp({ input: e.target.value });
+    const value = e.target.value;
+    setTemp({
+      ...temp,
+      [e.target.name]: value,
+    });
   }
 
   function handleEditSubmit(e, id) {
@@ -112,6 +116,7 @@ function App() {
     const newList = todoList.map((item) => {
       if (item.id === id) {
         item.input = temp.input;
+        item.hours = temp.hours;
       }
       return item;
     });

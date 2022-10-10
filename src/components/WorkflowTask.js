@@ -10,6 +10,7 @@ import {
   TodoListContainer,
   UpdateOptions,
   TodoText,
+  TimeInput,
 } from "../styles/todoStyle";
 
 function WorkflowTask({
@@ -41,6 +42,13 @@ function WorkflowTask({
                     maxLength='40'
                     value={temp.input || ""}
                     onChange={handleEditChange}></Input>
+                  <TimeInput
+                    maxLength={2}
+                    placeholder='00'
+                    name='hours'
+                    onChange={handleEditChange}
+                    value={temp.hours || ""}
+                    required></TimeInput>
                   <UpdateOptions>
                     <Button
                       type='button'
