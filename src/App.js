@@ -35,9 +35,11 @@ function App() {
     setTodoList((prev) => [
       ...prev,
       {
-        input: input,
+        input: input.task,
         id: id,
         canEdit: false,
+        hours: input.hours,
+        minutes: 0,
       },
     ]);
     //Reset addTodo field
@@ -56,7 +58,11 @@ function App() {
   }
 
   function handleChange(e) {
-    setInput(e.target.value);
+    const value = e.target.value;
+    setInput({
+      ...input,
+      [e.target.name]: value,
+    });
   }
 
   //Editing Todos
@@ -65,10 +71,10 @@ function App() {
     setTemp(taskToUpdate);
 
     const newList = todoList.map((item) => {
-      if (item.id !== id && item.canEdit === true) {
-        item.input = temp.input;
-        item.canEdit = false;
-      }
+      // if (item.id !== id && item.canEdit === true) {
+      //   item.input = temp.input;
+      //   item.canEdit = false;
+      // }
       if (item.id === id) {
         item.canEdit = item.canEdit ? false : true;
         setOpenEdit(true);
@@ -113,6 +119,7 @@ function App() {
     setTodoList(newList);
     toggleEdit(id);
     setOpenEdit(false);
+    setTemp("");
   }
 
   function handleEditWorkflowSubmit(e, id) {

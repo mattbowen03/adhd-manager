@@ -11,7 +11,10 @@ import {
   TodoListContainer,
   UpdateOptions,
   TodoText,
+  AddTaskContainer,
+  TimeInput,
 } from "../styles/todoStyle";
+import TaskTime from "./TaskTime";
 
 export default function Todo({
   todoList,
@@ -44,7 +47,15 @@ export default function Todo({
                       autoFocus
                       maxLength='40'
                       value={temp.input || ""}
-                      onChange={handleEditChange}></Input>
+                      onChange={handleEditChange}
+                      name='taskName'></Input>
+                    <TimeInput
+                      maxLength={2}
+                      placeholder='00'
+                      name='hours'
+                      onChange={handleEditChange}
+                      value={temp.hours || ""}
+                      required></TimeInput>
                     <UpdateOptions>
                       <Button
                         type='button'
@@ -84,21 +95,29 @@ export default function Todo({
           );
         })}
       </TodoListContainer>
-      <form
-        onSubmit={(e) => {
-          const id = Math.floor(Math.random() * 987132098);
-          addTodo(e, id);
-        }}>
-        <Input
-          type='text'
-          maxLength='40'
-          style={{ display: "block" }}
-          value={input || ""}
-          onChange={handleChange}
-          placeholder='Add Task...'
-        />
-        <Button type='submit'>Add Task</Button>
-      </form>
+      <AddTaskContainer>
+        <form
+          onSubmit={(e) => {
+            const id = Math.floor(Math.random() * 987132098);
+            addTodo(e, id);
+          }}>
+          <Input
+            autoFocus
+            type='text'
+            maxLength='40'
+            style={{ display: "block" }}
+            value={input.task || ""}
+            onChange={handleChange}
+            placeholder='Add Task...'
+            required
+            name='task'
+          />
+          <TaskTime input={input} handleChange={handleChange} />
+          <Button type='submit' style={{ display: "block" }}>
+            Add Task
+          </Button>
+        </form>
+      </AddTaskContainer>
     </div>
   );
 }
