@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import editIcon from "../images/bxs-edit-alt.svg";
 import deleteIcon from "../images/bx-x.svg";
 import plusIcon from "../images/bx-plus.svg";
@@ -15,7 +14,6 @@ import {
   TimeInput,
   TimeContainer,
 } from "../styles/todoStyle";
-import TaskTime from "./TaskTime";
 import displayTime from "../utils/displayTime";
 
 export default function Todo({
@@ -127,11 +125,16 @@ export default function Todo({
             name='task'
           />
           <TimeContainer>
-            <TaskTime input={input} handleChange={handleChange} />
-            <p>hrs.</p>
             <TimeInput
               type='number'
               maxLength={2}
+              placeholder='00'
+              name='hours'
+              onChange={handleChange}
+              value={input.hours || ""}></TimeInput>
+            <p>hrs.</p>
+            <TimeInput
+              type='number'
               placeholder='00'
               name='minutes'
               onChange={handleChange}
