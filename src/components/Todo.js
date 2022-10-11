@@ -86,7 +86,7 @@ export default function Todo({
                 <TaskItems>
                   <TodoText>{todo.input}</TodoText>
                   <p>{displayTime(todo.hours, todo.minutes)}</p>
-                  <Container>
+                  <Container style={{ justifyContent: "flex-end" }}>
                     <Button onClick={() => deleteTodo(todo.id)}>
                       <img src={deleteIcon} alt='delete' />
                     </Button>

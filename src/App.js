@@ -3,17 +3,18 @@ import styled from "styled-components";
 import Todo from "./components/Todo";
 import { useState } from "react";
 import WorkflowTask from "./components/WorkflowTask";
+import { AppWindow, Container } from "./styles/todoStyle";
 
 //Styles
 const LeftPaneStyled = styled.div`
-  width: 50%;
+  width: 100%;
   height: 100vh;
   background-color: rgb(250, 250, 250);
   padding: 8px;
 `;
 
 const CenterPaneStyled = styled.div`
-  width: 50%;
+  width: 100%;
   height: 100vh;
   padding: 8px;
 `;
@@ -186,44 +187,46 @@ function App() {
 
   return (
     <div className='App'>
-      <LeftPaneStyled>
-        <h1>Task List</h1>
-        <Todo
-          todoList={todoList}
-          addTodo={addTodo}
-          deleteTodo={deleteTodo}
-          input={input}
-          handleChange={handleChange}
-          toggleEdit={toggleEdit}
-          handleEditChange={handleEditChange}
-          temp={temp}
-          handleEditSubmit={handleEditSubmit}
-          revertChanges={revertChanges}
-          addToWorkflow={addToWorkflow}
-          openEdit={openEdit}
-        />
-      </LeftPaneStyled>
-      <CenterPaneStyled>
-        <h1>Workflow</h1>
-        <WorkflowTask
-          workflowList={workflowList}
-          todoList={todoList}
-          addTodo={addTodo}
-          deleteTodo={deleteTodo}
-          input={input}
-          handleChange={handleChange}
-          toggleWorkflowEdit={toggleWorkflowEdit}
-          handleEditChange={handleEditChange}
-          temp={temp}
-          handleEditWorkflowSubmit={handleEditWorkflowSubmit}
-          revertChanges={revertChanges}
-          addToWorkflow={addToWorkflow}
-          removeFromWorkflow={removeFromWorkflow}
-          deleteFromWorkflow={deleteFromWorkflow}
-          openEdit={openEdit}
-          revertWorkflowChanges={revertWorkflowChanges}
-        />
-      </CenterPaneStyled>
+      <AppWindow>
+        <LeftPaneStyled>
+          <h1>Task List</h1>
+          <Todo
+            todoList={todoList}
+            addTodo={addTodo}
+            deleteTodo={deleteTodo}
+            input={input}
+            handleChange={handleChange}
+            toggleEdit={toggleEdit}
+            handleEditChange={handleEditChange}
+            temp={temp}
+            handleEditSubmit={handleEditSubmit}
+            revertChanges={revertChanges}
+            addToWorkflow={addToWorkflow}
+            openEdit={openEdit}
+          />
+        </LeftPaneStyled>
+        <CenterPaneStyled>
+          <h1>Workflow</h1>
+          <WorkflowTask
+            workflowList={workflowList}
+            todoList={todoList}
+            addTodo={addTodo}
+            deleteTodo={deleteTodo}
+            input={input}
+            handleChange={handleChange}
+            toggleWorkflowEdit={toggleWorkflowEdit}
+            handleEditChange={handleEditChange}
+            temp={temp}
+            handleEditWorkflowSubmit={handleEditWorkflowSubmit}
+            revertChanges={revertChanges}
+            addToWorkflow={addToWorkflow}
+            removeFromWorkflow={removeFromWorkflow}
+            deleteFromWorkflow={deleteFromWorkflow}
+            openEdit={openEdit}
+            revertWorkflowChanges={revertWorkflowChanges}
+          />
+        </CenterPaneStyled>
+      </AppWindow>
     </div>
   );
 }

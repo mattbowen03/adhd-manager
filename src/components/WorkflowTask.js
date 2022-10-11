@@ -11,7 +11,9 @@ import {
   UpdateOptions,
   TodoText,
   TimeInput,
+  TaskItems,
 } from "../styles/todoStyle";
+import displayTime from "../utils/displayTime";
 
 function WorkflowTask({
   todoList,
@@ -65,25 +67,27 @@ function WorkflowTask({
                 </form>
               </div>
             ) : (
-              <Container>
-                <Container>
-                  <TodoText>{todo.input}</TodoText>
+              <TaskItems>
+                <TodoText>{todo.input}</TodoText>
+                <p>{displayTime(todo.hours, todo.minutes)}</p>
+
+                <Container style={{ justifyContent: "flex-end" }}>
+                  <Button onClick={() => deleteFromWorkflow(todo.id)}>
+                    <img src={deleteIcon} alt='delete' />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      if (!openEdit) {
+                        toggleWorkflowEdit(todo.id);
+                      }
+                    }}>
+                    <img src={editIcon} alt='edit' />
+                  </Button>
+                  <Button onClick={() => removeFromWorkflow(todo.id)}>
+                    <img src={minusIcon} alt='edit' />
+                  </Button>
                 </Container>
-                <Button onClick={() => deleteFromWorkflow(todo.id)}>
-                  <img src={deleteIcon} alt='delete' />
-                </Button>
-                <Button
-                  onClick={() => {
-                    if (!openEdit) {
-                      toggleWorkflowEdit(todo.id);
-                    }
-                  }}>
-                  <img src={editIcon} alt='edit' />
-                </Button>
-                <Button onClick={() => removeFromWorkflow(todo.id)}>
-                  <img src={minusIcon} alt='edit' />
-                </Button>
-              </Container>
+              </TaskItems>
             )}
           </TodoContainer>
         );

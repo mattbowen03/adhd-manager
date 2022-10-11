@@ -79,7 +79,6 @@ export const Container = styled.div`
 
 export const TodoText = styled.p`
   font-size: 16px;
-  width: 80%;
   word-wrap: break-word;
   color: #474748;
   font-weight: 500;
@@ -97,7 +96,9 @@ export const TodoListContainer = styled.div`
 
 export const TaskItems = styled.div`
   display: grid;
-  grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
+  grid-template-columns: minmax(200px, 2fr) 1fr 1fr;
+  grid-gap: 5px;
+  justify-content: space-between;
 `;
 
 export const UpdateOptions = styled.div`
@@ -106,8 +107,13 @@ export const UpdateOptions = styled.div`
 `;
 
 export const AddTaskContainer = styled.div`
-  display: grid;
-  grid-template-columns: 400px 50%;
   padding: 8px;
   background: #8db95b;
+`;
+
+export const AppWindow = styled.div`
+  display: grid;
+  grid-template-columns: 500px 50%;
+  min-width: 900px;
+  max-width: 1200px;
 `;
