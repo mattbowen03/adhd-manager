@@ -8,6 +8,12 @@ export default function displayTime(h, m) {
     hours = 0;
   }
 
+  if (m) {
+    minutes = parseInt(m, 10);
+  } else {
+    minutes = 0;
+  }
+
   if (m && m < 10) {
     minutes = parseInt(m, 10);
     minutes = "0" + minutes;
@@ -17,10 +23,14 @@ export default function displayTime(h, m) {
     minutes = parseInt(m, 10);
   }
 
-  if (hours === 0) {
+  if (hours === 0 && m) {
     minutes = parseInt(m, 10);
     return minutes + `${minutes < 2 ? " min" : " mins"}`;
   }
 
-  return hours + ":" + minutes;
+  if (hours === 0 && minutes === 0) {
+    return "0 mins";
+  }
+
+  return hours + ":" + minutes + `${minutes < 2 ? " min" : " mins"}`;
 }

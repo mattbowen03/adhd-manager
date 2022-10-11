@@ -13,6 +13,7 @@ import {
   AddTaskContainer,
   TimeInput,
   TimeContainer,
+  TaskItems,
 } from "../styles/todoStyle";
 import displayTime from "../utils/displayTime";
 
@@ -82,26 +83,26 @@ export default function Todo({
                   </form>
                 </div>
               ) : (
-                <Container>
+                <TaskItems>
+                  <TodoText>{todo.input}</TodoText>
+                  <p>{displayTime(todo.hours, todo.minutes)}</p>
                   <Container>
-                    <TodoText>{todo.input}</TodoText>
-                    <p>{displayTime(todo.hours, todo.minutes)}</p>
+                    <Button onClick={() => deleteTodo(todo.id)}>
+                      <img src={deleteIcon} alt='delete' />
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        if (!openEdit) {
+                          toggleEdit(todo.id);
+                        }
+                      }}>
+                      <img src={editIcon} alt='edit' />
+                    </Button>
+                    <Button onClick={() => addToWorkflow(todo.id)}>
+                      <img src={plusIcon} alt='edit' />
+                    </Button>
                   </Container>
-                  <Button onClick={() => deleteTodo(todo.id)}>
-                    <img src={deleteIcon} alt='delete' />
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      if (!openEdit) {
-                        toggleEdit(todo.id);
-                      }
-                    }}>
-                    <img src={editIcon} alt='edit' />
-                  </Button>
-                  <Button onClick={() => addToWorkflow(todo.id)}>
-                    <img src={plusIcon} alt='edit' />
-                  </Button>
-                </Container>
+                </TaskItems>
               )}
             </TodoContainer>
           );
@@ -114,6 +115,7 @@ export default function Todo({
             addTodo(e, id);
           }}>
           <Input
+            className='addTask'
             autoFocus
             type='text'
             maxLength='40'

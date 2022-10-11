@@ -45,6 +45,8 @@ function App() {
     ]);
     //Reset addTodo field
     setInput("");
+    const ref = document.querySelector(".addTask");
+    ref.focus();
   }
 
   //Deleting Todos

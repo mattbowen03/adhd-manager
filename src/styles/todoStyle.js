@@ -95,13 +95,19 @@ export const TodoListContainer = styled.div`
   border: 1px solid lightgray;
 `;
 
+export const TaskItems = styled.div`
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
+`;
+
 export const UpdateOptions = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
 export const AddTaskContainer = styled.div`
-  /* border: 1px solid lightgray; */
+  display: grid;
+  grid-template-columns: 400px 50%;
   padding: 8px;
   background: #8db95b;
 `;
